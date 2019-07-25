@@ -1,9 +1,13 @@
 package com.mloine.classLoad;
 
 import com.sun.nio.zipfs.ZipPath;
+import sun.misc.Launcher;
+import sun.misc.URLClassPath;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLClassLoader;
 import java.util.HashMap;
 
 /**
@@ -34,6 +38,9 @@ public class ClassLoaderTest extends ClassLoader{
         System.out.println("自定义类加载器："+o.getClass().getClassLoader());
         //没有打破双亲委派是相同类  打破双亲委派需要重写loadClass()
         System.out.println("类型是否相同："+(o instanceof  ClassLoaderTest));
+
+
+        echo();
     }
 
     //打破双亲委派必须重写loadClass
@@ -54,6 +61,35 @@ public class ClassLoaderTest extends ClassLoader{
         }catch(IOException e){
             throw new ClassNotFoundException(name);
         }
+    }
+
+    /**
+     * 打印类加载目录 和信息
+     */
+    public static void echo(){
+        System.out.println("-------------------------------------------------------------------------------------------------------");
+        System.out.println("加载目录-顶级类加载器bootStrapClassloader:"+Launcher.getLauncher().getClassLoader());
+        URLClassPath bootstrapClassPath = Launcher.getBootstrapClassPath();
+        URL[] urLs = bootstrapClassPath.getURLs();
+        for (URL u :urLs){
+            System.out.println(u.toString());
+        }
+
+        URLClassLoader extClassLoader = (URLClassLoader) ZipPath.class.getClassLoader();
+        System.out.println("加载目录-扩展类加载器extClassLoader" + extClassLoader);
+        URL[] urLs1 = extClassLoader.getURLs();
+        for (URL u :urLs1){
+            System.out.println(u.toString());
+        }
+
+        URLClassLoader appClassLoader = (URLClassLoader) ClassLoaderTest.class.getClassLoader();
+        System.out.println("加载目录-应用类加载器extClassLoader" + appClassLoader);
+        URL[] urLs2 = appClassLoader.getURLs();
+        for (URL u :urLs2){
+            System.out.println(u.toString());
+        }
+
+
     }
 
 }
