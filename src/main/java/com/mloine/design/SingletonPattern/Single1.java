@@ -18,7 +18,7 @@ public class Single1 {
 
     public static void main(String[] args) {
 
-        Single1 d = Single1.d;
+        Single1 d = Single1.getInstance();
 
     }
 }
