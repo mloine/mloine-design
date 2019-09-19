@@ -1,0 +1,84 @@
+RabbitMq  依赖erlang语言 需要事先准备环境
+
+-- 安装erlang 依赖
+
+wget http://erlang.org/download/otp_src_21.1.tar.gz
+
+tar -zxvf otp_src_21.1.tar.gz
+
+mkdir -p /usr/local/erlang
+
+yum install -y make gcc gcc-c++ m4 openssl openssl-devel ncurses-devel unixODBC unixODBC-devel java java-devel
+
+./configure --prefix=/usr/local/erlang
+
+-- 编译需要java环境
+make && make install
+
+
+-- 加入环境变量
+/usr/local/erlang/bin
+
+
+-- 开始安装支持版本的rabbitMq
+wget https://github.com/rabbitmq/rabbitmq-server/releases/download/v3.7.8/rabbitmq-server-generic-unix-3.7.8.tar.xz
+
+
+tar -xvf rabbitmq-server-generic-unix-3.7.8.tar.xz
+
+-- 添加环境变量
+
+/usr/local/rabbitmq_server-3.7.8/sbin
+
+
+# 添加web管理插件
+rabbitmq-plugins enable rabbitmq_management
+
+
+
+rabbitmq-server -detached
+
+
+-- 访问地址
+http://118.190.215.176:15672
+
+服务启动停止：
+
+启动： rabbitmq-server -detached
+
+停止： rabbitmqctl stop
+
+插件管理：
+
+插件列表： rabbitmq-plugins list 
+
+启动插件： rabbitmq-plugins enable XXX   （XXX为插件名）
+
+停用插件： rabbitmq-plugins disable XXX
+
+用户管理：
+
+添加用户： rabbitmqctl add_user username password
+
+删除用户： rabbitmqctl delete_user username
+
+修改密码： rabbitmqctl change_password username newpassword
+
+设置用户角色： rabbitmqctl set_user_tags username tag
+
+列出用户： rabbitmqctl list_users
+
+权限管理：
+
+列出所有用户权限： rabbitmqctl list_permissions
+
+查看制定用户权限： rabbitmqctl list_user_permissions username
+
+清除用户权限： rabbitmqctl clear_permissions [-p vhostpath] username
+
+设置用户权限： rabbitmqctl set_permissions [-p vhostpath] username conf write read
+
+                          conf: 一个正则匹配哪些资源能被该用户访问
+
+                          write：一个正则匹配哪些资源能被该用户写入
+
