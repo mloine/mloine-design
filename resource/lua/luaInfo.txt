@@ -1,0 +1,48 @@
+lua 脚本
+
+Lua是动态类型语言，变量不要类型定义,只需要为变量赋值。 值可以存储在变量中，作为参数传递或结果返回。
+Lua中有8个基本类型分别为：nil、boolean、number、string、userdata、function、thread和table。
+
+
+1. 解析器就400k左右大小 ,语言具有原子性的特点  可以在程序中结合使用
+    nginx     可使用
+    redis     可使用
+
+2.linux中安装lua
+    Lua在linux中的安装
+
+    到官网下载lua的tar.gz的源码包
+    wget http://www.lua.org/ftp/lua-5.3.5.tar.gz .
+    tar -zxvf lua-5.3.0.tar.gz
+
+    进入解压的目录：
+    cd lua-5.2.0
+    make linux
+    make install
+
+    如果报错，说找不到readline/readline.h, 可以通过yum命令安装
+    yum -y install libtermcap-devel ncurses-devel libevent-devel readline-devel
+    安装完以后再make linux  / make install
+    最后，直接输入 lua命令即可进入lua的控制台
+
+3.语言例子
+  ipCount.lua  ip访问限流例子
+
+  a.redis中执行ipCount.lua 可以粗略的理解为java中的函数 可以多次调用
+    1.加载lua脚本到redis中
+    ./redis-cli -h 127.0.0.1 -a 12345678 script load "$(cat ipCount.lua)"
+
+    [root@VM_0_13_centos redis]# ./redis-cli script load "$(cat ipCount.lua)"
+    "aea4448d7c03d93f043516a536949b6a5b17673f"
+    此处会返回lua脚本在redis中的sha值 用来标识一个lua脚本
+    2.在redis中执行lua脚本
+    -- 执行
+    evalsha aea4448d7c03d93f043516a536949b6a5b17673f 1 192.168.2.2 5 2
+    -- 判断脚本有没有加载成功  xxx为sha值
+    script exits xxxx
+    -- 清空加载到redis的lua脚本
+    script flush
+    -- 杀掉正在执行的lua脚本
+    script kill
+
+b
