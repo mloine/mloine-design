@@ -4,6 +4,7 @@
 ## 邮箱: m15618975413@163.com
 ### 描述：资源为本人从事本行业记录
 
+[redis指令参考]: https://www.jianshu.com 
 
 <ul>
   <li>1.类加载机制</li>
@@ -17,7 +18,7 @@
   <li> 3.JVM</li>  
   <li> 4.MQ消息队列</li>  
   <li> 5.NIO</li>
-  <li> 6.redis 附带lua脚本</li>
+  <li> 6.redis 附带lua脚本 [redis指令参考]</li>
   <li> 敬请等待</li>
 </ul>
 
