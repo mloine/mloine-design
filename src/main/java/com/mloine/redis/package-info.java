@@ -22,5 +22,16 @@ package com.mloine.redis;
  *      f.主从复制
  *      g.高可用和分布式转移
  *      h.客户端语言多
+ *  3.重要指令
+ *    1.查看所有键(生产不推荐) keys *
+ *    2.键总数 dbsize
+ *    3.键值是否存在 exists key
+ *    4.删除键 del key
+ *    5.键过期 expire key 10
+ *    6.查看剩余过期时间 ttl key
+ *    7.查看键的数据类型 type key
+ *
+ *    set
+ *    setnx
  *
  **/
