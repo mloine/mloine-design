@@ -11,23 +11,23 @@ import redis.clients.jedis.JedisPoolConfig;
  */
 public class RedisDemo {
 
-    private String ip = "127.0.0.1";
-    private int port = 6379;
-    private String auth = "12345678";
+    public static String ip = "127.0.0.1";
+    public static int port = 6379;
+    public static String auth = "12345678";
 
-    public JedisPool getJedispool(){
+    public static JedisPool getJedispool(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(500);
         jedisPoolConfig.setMaxIdle(5);
         jedisPoolConfig.setMaxWaitMillis(100);
         jedisPoolConfig.setTestOnBorrow(true);
-//       return new JedisPool(jedisPoolConfig,this.ip,this.port,100000,this.auth);
-       return new JedisPool(jedisPoolConfig,this.ip,this.port,100000,null);
+//       return new JedisPool(jedisPoolConfig,ip,port,100000,auth);
+       return new JedisPool(jedisPoolConfig, ip,port,100000,null);
     }
 
     public static void main(String[] args) {
 
-        JedisPool jedispool = new RedisDemo().getJedispool();
+        JedisPool jedispool = RedisDemo.getJedispool();
         Jedis jedis = jedispool.getResource();
         /**
          * key:ey
