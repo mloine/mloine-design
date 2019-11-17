@@ -1,0 +1,28 @@
+import com.mloine.spring.demo5.config.MloineConfig5;
+import com.mloine.spring.demo6.config.MloineConfig6;
+import org.junit.Test;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
+import java.util.Arrays;
+import java.util.Collections;
+
+/**
+ *  @Author: XueYongKang
+ *  @Description:
+ *  @Data: 2019/11/13 14:51
+ */
+public class SpringDemo6Test {
+
+    @Test
+    public void test1(){
+        AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(MloineConfig6.class);
+
+        System.out.println("IOC容器创建完成....................");
+
+        String[] beanDefinitionNames = app.getBeanDefinitionNames();
+
+        Arrays.asList(beanDefinitionNames).stream().forEach(System.out::println);
+
+
+    }
+}
