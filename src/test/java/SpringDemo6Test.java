@@ -1,10 +1,8 @@
-import com.mloine.spring.demo5.config.MloineConfig5;
 import com.mloine.spring.demo6.config.MloineConfig6;
 import org.junit.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Arrays;
-import java.util.Collections;
 
 /**
  *  @Author: XueYongKang
@@ -16,6 +14,13 @@ public class SpringDemo6Test {
     @Test
     public void test1(){
         AnnotationConfigApplicationContext app = new AnnotationConfigApplicationContext(MloineConfig6.class);
+
+        Object bean1 =  app.getBean("mloineFactoryBean");
+        Object bean2 =  app.getBean("mloineFactoryBean");
+        System.out.println(bean1.getClass());
+        System.out.println(bean2.getClass());
+        System.out.println(bean1 == bean2);
+
 
         System.out.println("IOC容器创建完成....................");
 
