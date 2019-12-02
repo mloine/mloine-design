@@ -21,6 +21,7 @@ public class SpringDemo6Test {
         System.out.println(bean2.getClass());
         System.out.println(bean1 == bean2);
 
+        Object bean3 =  app.getBean("&mloineFactoryBean");
 
         System.out.println("IOC容器创建完成....................");
 
