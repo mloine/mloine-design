@@ -1,10 +1,11 @@
 package com.mloine.thread;
 /**
  * @Author mloine
- * @Description interrupt catch住需要手动中断
+ * @Description 守护线程Daemon  finally语句块在守护线程中不一定执行！！！！！！
+ *
  * @Date 1:59 下午 2020/1/2
  */
-public class EndThreadInterrupt {
+public class DaemonThread {
 
     private static class UseThread extends Thread{
 
@@ -25,6 +26,8 @@ public class EndThreadInterrupt {
 //                    Thread.interrupted();
                     interrupt();//cathch 时候需要手动在中断一下
                     e.printStackTrace();
+                }finally {
+                    System.out.println("finally 语句快执行.......");
                 }
                 System.out.println(name+"is runing .......");
             }
@@ -36,11 +39,11 @@ public class EndThreadInterrupt {
 
     public static void main(String[] args) throws InterruptedException {
         UseThread endThread = new UseThread("endThread");
-        endThread.setPriority(10);//线程优先级设置 默认5
+        endThread.setDaemon(Boolean.TRUE);
         endThread.start();
-        Thread.sleep(500);
-        endThread.interrupt();
-
+        Thread.sleep(15);
+//        endThread.interrupt();
+        
     }
 
 
