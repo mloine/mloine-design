@@ -36,21 +36,32 @@ public class TestApi {
     }
 
     public static void main(String[] args) throws IOException {
+
         // 1.测试表是否存在
-        String tableName = "stu5";
-        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
+//        String tableName = "stu5";
+//        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
 
         // 2.创建表测试
-        createTable("672898:stu5","info1","info2");
-        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
+//        createTable("672898:stu5","info1","info2");
+//        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
 
 
         //3.表删除测试
-        dropTable("stu5");
-        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
+//        dropTable("stu5");
+//        System.out.printf("表%s是否存在%s\n",tableName,isTableExist(tableName));
 
         //4.创建命名空间测试
-        createNameSpace("672898");
+//        createNameSpace("672898");
+
+        //5.表添加cell数据
+//        putData("stu","1001","info2","name","zhangsan");
+//        putData("stu","1001","info2","sex","male");
+
+        //6.获取单行数据
+//        getData("stu","1001","","");
+//        getData("stu","1001","info1","");
+//        getData("stu","1001","info1","name");
+        getData("stu2","1001","info","name");
 
         close();
     }
@@ -179,8 +190,15 @@ public class TestApi {
 
 
     //DML
-
-    //1.插入数据
+    /**
+     * 1.插入数据
+     * @param tableName 表名
+     * @param rowKey  rowkey
+     * @param cf   列族
+     * @param cn   列明
+     * @param value   值
+     * @throws IOException
+     */
     public static void putData(String tableName,String rowKey,String cf,String cn,String value) throws IOException {
         // 拿到表
         Table table = connection.getTable(TableName.valueOf(tableName));
@@ -194,7 +212,33 @@ public class TestApi {
     }
 
     //2.查数据get
+    public static void getData(String tableName,String rowKey,String cf,String cn) throws IOException {
+        Table table = connection.getTable(TableName.valueOf(tableName));
+        Get get = new Get(Bytes.toBytes(rowKey));
 
+        //指定获取的列族
+        if(StringUtils.isEmpty(cn) && !StringUtils.isEmpty(cf)){
+            get.addFamily(Bytes.toBytes(cf));
+        }
+        if(!StringUtils.isEmpty(cn) && !StringUtils.isEmpty(cf)) {
+            get.addColumn(Bytes.toBytes(cf),Bytes.toBytes(cn));
+        }
+
+        //设置获取数据的版本数
+        get.setMaxVersions(2);
+
+        Result result = table.get(get);
+
+        //解析结果
+        Arrays.stream(result.rawCells()).forEach((cell)->{
+            String cf1 = Bytes.toString(CellUtil.cloneFamily(cell));
+            String cn2 = Bytes.toString(CellUtil.cloneQualifier(cell));
+            String value2 = Bytes.toString(CellUtil.cloneValue(cell));
+            System.out.printf("CF:%s,\tCN:%s,\tValue:%s\n",cf1,cn2,value2);
+        });
+
+
+    }
     //3.查数据scan
 
     //4.删除数据
