@@ -20,7 +20,8 @@
   <li> 5.NIO</li>
   <li> 6.redis 附带lua脚本 [redis指令参考]</li>
   <li> 7.spring</li>
-  <li> 敬请等待</li>
+  <li> 8.Hbase api</li>
+  <li> 敬请期待</li>
 </ul>
 
 
