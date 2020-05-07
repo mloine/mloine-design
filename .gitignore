@@ -1,0 +1,39 @@
+# Created by .ignore support plugin (hsz.mobi)
+### Example user template template
+### Example user template
+
+# IntelliJ project files
+.idea
+*.iml
+out
+gen
+### Maven template
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+# https://github.com/takari/maven-wrapper#usage-without-binary-jar
+.mvn/wrapper/maven-wrapper.jar
+
+.idea/jarRepositories.xml
+target/classes/com/mloine/classLoad/
+target/classes/com/mloine/design/SingletonPattern/
+target/classes/com/mloine/design/StrategyPattern/
+target/classes/com/mloine/design/decorator/
+target/classes/com/mloine/hbase/
+target/classes/com/mloine/lock/
+target/classes/com/mloine/mq/
+target/classes/com/mloine/nio/
+target/classes/com/mloine/redis/
+target/classes/com/mloine/spring/
+target/classes/com/mloine/thread/
+target/classes/com/mloine/tools/
+target/classes/spring/
+target/generated-sources/
+target/generated-test-sources/
+target/test-classes/
